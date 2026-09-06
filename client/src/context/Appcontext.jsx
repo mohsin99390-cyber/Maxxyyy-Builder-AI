@@ -1,4 +1,4 @@
-import { createContext, useState } from "react";
+import { createContext, useState, useContext } from "react";
 
 
 const AppContext = createContext(undefined)
@@ -19,9 +19,8 @@ export function AppContextProvider({ children }) {
 }
 
 export function useAppContext() {
-    const context = usecontext(AppContext);
-    if (context === undefined) {
+    if (useContext(AppContext) === undefined) {
         throw new Error("useAppContext must be used within an AppContextprovider");
     }
-    return context;
+    return useContext(AppContext);
 }

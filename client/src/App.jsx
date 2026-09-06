@@ -19,8 +19,8 @@ const App = () => {
 
       {/* Protected routes */}
       <Route element={<AuthLayout />}>
-        <Route path='/' element={<Homepage />} />
-        <Route path='/builder/:id' element={<BuilderPage />} />
+        <Route path='/' element={<homepage />} />
+        <Route path='/builder/:id' element={<builderpage />} />
         <Route path='/preview/:id' element={<Previewpage />} />
 
       </Route >

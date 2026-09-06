@@ -4,10 +4,10 @@ import { useAppContext } from '../context/Appcontext'
 import Loading from '../components/Loading'
 
 export function AuthLayout(){
-    const {user , loadingUser} = useAppContext()
+    const {user , LoadingUser} = useAppContext()
 
 
-if(loadingUser) return <loading />
+if(LoadingUser) return <Loading />
 if (!user) return <Navigate to = "/login" replace />
 
 return <Outlet />
@@ -15,10 +15,10 @@ return <Outlet />
 }
 
 export function GuestLayout(){
-    const {user , loadingUser} = useAppContext()
+    const {user , LoadingUser} = useAppContext()
 
 
-if(loadingUser) return <loading />
+if(LoadingUser) return <Loading />
 if (user) return <Navigate to = "/" replace />
 
 return <Outlet />

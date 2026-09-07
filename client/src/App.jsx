@@ -1,6 +1,6 @@
 import { Layout } from 'lucide-react'
 import React from 'react'
-import { Route, Routes } from 'react-router-dom'
+import { Navigate, Route, Routes } from 'react-router-dom'
 import Authpage from './pages/Authpage'
 import { AuthLayout, GuestLayout } from './pages/Layout'
 import homepage from './pages/homepage'
@@ -22,8 +22,11 @@ const App = () => {
         <Route path='/' element={<homepage />} />
         <Route path='/builder/:id' element={<builderpage />} />
         <Route path='/preview/:id' element={<Previewpage />} />
-
       </Route >
+
+      {/* {Catch all} */}
+      <Route path='*' element={<Navigate to="/" replace />} />
+
     </Routes >
   )
 }

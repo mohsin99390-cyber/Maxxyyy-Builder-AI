@@ -1,5 +1,5 @@
 import React from 'react'
-import { Outlet } from 'react-router-dom'
+import {Navigate, Outlet } from 'react-router-dom'
 import { useAppContext } from '../context/Appcontext'
 import Loading from '../components/Loading'
 
@@ -8,7 +8,7 @@ export function AuthLayout(){
 
 
 if(LoadingUser) return <Loading />
-if (!user) return <Navigate to = "/login" replace />
+if (!user) return <Navigate to = "/login" replace/>
 
 return <Outlet />
     
@@ -19,7 +19,7 @@ export function GuestLayout(){
 
 
 if(LoadingUser) return <Loading />
-if (user) return <Navigate to = "/" replace />
+if (user) return <Navigate to = "/" replace/>
 
 return <Outlet />
     

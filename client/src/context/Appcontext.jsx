@@ -1,10 +1,13 @@
 import { createContext, useState, useContext, useEffect } from "react";
 import axios from "axios";
-
+import toast from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
 
 const AppContext = createContext(undefined)
 
 export function AppContextProvider({ children }) {
+
+    const navigate = useNavigate
 
     //Auth states
     const [user, setUser] = useState(null)
@@ -24,9 +27,40 @@ export function AppContextProvider({ children }) {
         checkSession()
       },[checkSession])
 
+      const login = async (email, password) => {
+        try {
+            const {data} = await api.post("/api/auth/login",
+                {email, password});
+                setUser(data.user)
+                toast.success("Welcome back")
+                navigate("/")
+        } catch (err) {
+            console.error("login failed:", err);
+            const errMsg = err?.response?.data?error || "Invalid email or password";
+            toast.error(errMsg);
+            throw new Error(errMsg);
+            
+        }
+      }
+      const register = async (name, email, password) => {
+        try {
+            const {data} = await api.post("/api/auth/register",
+                {name, email, password});
+                setUser(data.user)
+                toast.success("Account created sucessfully")
+                navigate("/")
+        } catch (err) {
+            console.error("registration failed:", err);
+            const errMsg = err?.response?.data?error || "registration failed";
+            toast.error(errMsg);
+            throw new Error(errMsg);
+
     return (
         <AppContext.Provider value={{
-            user, LoadingUser
+            user, LoadingUser,
+            login,
+            register
+
         }}>
             {children}
         </AppContext.Provider>
